@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+:root {
+  --color-p: #fdfcf6;
+  --color-s: #59d9e4;
+  --color-t: #35b5fe;
+  --color-q: #5571ff;
+  --color-qi: #0c57b1;
+  --color-sx: #23231c;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+body {
+  margin: 0;
+  background: var(--color-p);
+  background-image: url("../public/fundo.png");
+  
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 120px;
+}
+
+.header-content {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  width: 85%;
+  border-bottom: 1px solid rgb(117, 116, 116);
+}
+
+.header-logo {
+  justify-self: start;
+}
+.header-logo img {
+  max-width: 200px;
+  max-height: 100px;
+
+  transition: all 0.3s;
+}
+
+.header-logo img:hover {
+  transform: scale(1.1);
+}
+
+.header-actions {
+  justify-self: center;
+
+  display: flex;
+  gap: 40px;
+}
+
+.header-actions a {
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  color: black;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.header-actions a:hover {
+  color: var(--color-qi);
+  transform: scale(1.1);
+}
+
+.header-btn {
+  justify-self: end;
+}
+
+.header-btn button {
+  width: 130px;
+  height: 30px;
+
+  padding: 20px;
+
+  color:white;
+  font-size: 14px;
+  font-family: "Lato", sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  border: none;
+
+  color: white;
+  background: linear-gradient(90deg, var(--color-s), var(--color-t));
+
+  cursor: pointer;
+
+  transition: transform 0.3s;
+}
+
+.header-btn button:hover {
+  transform: scale(1.1);
+}
+
+.header-btn:active {
+  transform: scale(0.97);
+}
+
+.hero-content{ 
+    min-height: calc(95svh - 120px);
+
+    display: flex;
+    align-items: center; 
+    border-bottom: 1px solid rgb(117, 116, 116);
+}
+
+.hero-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+
+    gap: 60px;
+}
+
+.hero-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+}
+
+.hero-title{
+    max-width: 600px;
+}
+
+.hero-title h1{
+    font-family: "Bruno Ace", sans-serif;
+    color: var(--color-t);
+    font-weight: 700;
+    line-height: 1.25;
+    font-size: 42px;
+
+    margin: 0;
+}
+
+.hero-title p{
+    max-width: 520px;
+
+    font-family: "Bruno Ace", sans-serif;
+    color: #666;   
+    font-size: 14px;
+    line-height: 1.7;
+
+    margin-top: 25px;
+}
+
+.hero-btn{
+    display: flex;
+    gap: 20px;
+}
+
+.hero-btn button:first-child{
+    padding: 16px 28px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: var(--color-s);
+
+    color:white;
+    font-size: 16px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: background-color 0.5s, transform 0.5s;
+}
+
+.hero-btn button:first-child:hover{
+    background-color: var(--color-qi);
+    transform: scale(1.05);
+}
+
+.hero-btn button:first-child:active{
+    transform: scale(0.95);
+}
+
+.hero-btn button:nth-child(2){
+    padding: 16px 28px;
+
+    border: 1px solid rgb(117, 116, 116);
+    border-radius: 6px;
+
+    background: transparent;
+
+    color:rgb(117, 116, 116);
+    font-size: 16px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: background-color 0.5s, transform 0.5s;
+}
+
+.hero-btn button:nth-child(2):hover{
+    background-color: var(--color-qi);
+    opacity:initial;
+    color: white;
+    transform: scale(1.05);
+}
+
+.hero-image{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.hero-image img{
+    width: 110%;
+    max-width: 1000px;
+
+    display: block;
+
+    border-radius: 2000px;
+}
+
+.hero-benefits{
+    display: flex;
+    align-items: center;
+    gap: 30px; 
+
+    margin-top: 25px;
+}
+
+.benefit-item{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    border-radius: 6px;
+    border: 0.1px solid #666;
+
+    padding: 10px;
+
+    transition: box-shadow 0.5s, transform 0.5s ease;
+    cursor: default;
+}
+
+.benefit-item:hover{
+    box-shadow: 0 0 10px var(--color-s);
+    transform: scale(1.15);
+}
+
+.benefit-item svg{
+    width: 30px;
+    height: 30px;
+
+    color: var(--color-s);
+    stroke-width: 1.8;
+}
+
+.benefit-item span{
+    font-size:14px;
+    color: #666;
+    white-space: nowrap;
+}
