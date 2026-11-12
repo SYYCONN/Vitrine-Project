@@ -270,3 +270,20 @@ header {
     color: #666;
     white-space: nowrap;
 }
+
+/* ===== Etiqueta de seção (reutilizável) ===== */
+
+.section-title {
+    display: inline-block;
+
+    font-family: "Lato", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-qi);
+}
+
+.highlight-text {
+    color: var(--color-t);
+}
