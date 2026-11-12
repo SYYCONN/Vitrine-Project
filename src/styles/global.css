@@ -24,7 +24,7 @@ html {
 body {
   margin: 0;
   background: var(--color-p);
-  background-image: url("../public/fundo.png");
+  background-image: url("/fundo.png");
   
 }
 

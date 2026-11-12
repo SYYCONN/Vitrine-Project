@@ -5,7 +5,7 @@ function Header(){
         <header>
             <div className="header-content">
                 <div className="header-logo">
-                    <img src='./public/icon-vitrine.png' />
+                    <img src='/icon-vitrine.png' />
                 </div>
                 <nav className="header-actions">
                     <a href="#sobre">SOBRE</a>

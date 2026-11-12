@@ -1,5 +1,6 @@
 import "../styles/global.css";
 import { ShieldCheck, Rocket, ChartNoAxesCombined } from "lucide-react";
+import heroImg from "../assets/hero-img.png";
 
 function Hero() {
   return (
@@ -40,7 +41,7 @@ function Hero() {
             </div>
           </div>
           <div className="hero-image">
-            <img src="../src/assets/hero-img.png" />
+            <img src={heroImg} />
           </div>
         </div>
       </div>
