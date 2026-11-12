@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { PanelsTopLeft, PenTool, UsersRound, Wrench } from "lucide-react";
 import kitchenImage from "../assets/portfolio-cozinha.jpg";
 import shelvesImage from "../assets/portfolio-estante.jpg";
@@ -70,24 +69,6 @@ const portfolioExamples = [
 ];
 
 function LandingPageInfo() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleQuoteSubmit(event) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const phone = form.elements.namedItem("example-quote-phone");
-    const digits = phone.value.replace(/\D/g, "");
-
-    if (digits.length < 10 || digits.length > 13 || /[^\d+()\s.-]/.test(phone.value)) {
-      phone.setCustomValidity("Informe um número de WhatsApp com DDD.");
-      phone.reportValidity();
-      return;
-    }
-
-    form.reset();
-    setSubmitted(true);
-  }
-
   return (
     <section
       id={landingPageInfoId}
@@ -127,43 +108,23 @@ function LandingPageInfo() {
                     </li>
                   ))}
                 </ul>
-                <form
-                  className="landing-page-example-form"
-                  aria-labelledby="example-quote-title"
-                  aria-describedby="landing-page-example-caption"
-                  autoComplete="off"
-                  onInput={() => setSubmitted(false)}
-                  onSubmit={handleQuoteSubmit}
-                >
-                  <h4 id="example-quote-title">Quer um móvel assim?</h4>
+                <div className="landing-page-example-quote">
+                  <h4>Quer um móvel assim?</h4>
                   <div className="landing-page-example-fields">
-                    <label>
+                    <div className="landing-page-example-field">
                       Seu nome
-                      <input type="text" minLength={2} maxLength={80} required />
-                    </label>
-                    <label>
+                      <span className="landing-page-example-field-box" aria-hidden="true" />
+                    </div>
+                    <div className="landing-page-example-field">
                       Seu WhatsApp
-                      <input
-                        id="example-quote-phone"
-                        type="tel"
-                        maxLength={24}
-                        onInput={(event) => event.currentTarget.setCustomValidity("")}
-                        required
-                      />
-                    </label>
+                      <span className="landing-page-example-field-box" aria-hidden="true" />
+                    </div>
                   </div>
-                  <button className="landing-page-example-cta" type="submit">
-                    Pedir orçamento
-                  </button>
-                </form>
+                  <span className="landing-page-example-cta">Pedir orçamento</span>
+                </div>
               </div>
             </div>
-            <figcaption id="landing-page-example-caption">
-              Exemplo ilustrativo. {" "}
-              <span role="status">
-                {submitted ? "Pedido simulado, sem envio de dados." : "Nenhum dado é enviado."}
-              </span>
-            </figcaption>
+            <figcaption>Exemplo ilustrativo. Não é um formulário real.</figcaption>
           </figure>
           <div className="landing-page-info-copy">
             <h3>01 — Da vitrine à oportunidade</h3>
@@ -197,11 +158,13 @@ function Services() {
         aria-labelledby="services-title"
       >
         <div className="container">
-          <h2 id="services-title">O que a Vitrine faz pelo seu negócio</h2>
-          <p>
-            Tudo o que você precisa para ter presença online de verdade, em uma
-            única página.
-          </p>
+          <div className="services-intro">
+            <h2 id="services-title">O que a Vitrine faz pelo seu negócio</h2>
+            <p>
+              Tudo o que você precisa para ter presença online de verdade, em
+              uma única página.
+            </p>
+          </div>
           <div className="services-grid">
             {services.map(({ id, ...service }) => (
               <ServiceCard key={id} {...service} />

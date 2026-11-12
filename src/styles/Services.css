@@ -6,14 +6,15 @@
   }
 }
 
-.header-actions a[href="#servicos"] {
-  text-decoration: none;
-}
-
-.header-actions a[href="#servicos"]:focus-visible {
-  color: var(--color-qi);
-  outline-offset: 4px;
-  transform: scale(1.1);
+.services-intro :is(h2, p),
+.landing-page-info-intro :is(h2, p),
+.landing-page-info-copy :is(h3, p, dt, dd),
+.landing-page-example figcaption {
+  text-shadow:
+    1px 0 var(--color-p),
+    -1px 0 var(--color-p),
+    0 1px var(--color-p),
+    0 -1px var(--color-p);
 }
 
 .services-section {
@@ -25,7 +26,7 @@
   box-sizing: border-box;
 }
 
-.services-section > .container > h2 {
+.services-intro h2 {
   position: relative;
   margin: 0 0 18px;
   color: var(--color-sx);
@@ -33,7 +34,7 @@
   text-align: center;
 }
 
-.services-section:target > .container > h2::after {
+.services-section:target .services-intro h2::after {
   position: absolute;
   inset-block-end: -8px;
   inset-inline: 0;
@@ -46,7 +47,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .services-section:target > .container > h2::after {
+  .services-section:target .services-intro h2::after {
     transform-origin: left;
     animation: services-accent-in 650ms ease-out 160ms both;
   }
@@ -59,7 +60,7 @@
   }
 }
 
-.services-section > .container > p {
+.services-intro p {
   max-width: 84ch;
   margin: 0 auto;
   color: #56564e;
@@ -414,18 +415,18 @@
   }
 }
 
-.landing-page-example-form,
+.landing-page-example-quote,
 .landing-page-example-fields {
   display: grid;
   gap: 10px;
 }
 
-.landing-page-example-form h4 {
+.landing-page-example-quote h4 {
   margin: 0;
   font: 900 19px/1.25 "Lato", sans-serif;
 }
 
-.landing-page-example-fields label {
+.landing-page-example-field {
   display: grid;
   min-inline-size: 0;
   gap: 4px;
@@ -434,15 +435,12 @@
   text-align: start;
 }
 
-.landing-page-example-fields input {
+.landing-page-example-field-box {
   box-sizing: border-box;
   inline-size: 100%;
   min-block-size: 44px;
-  padding: 8px 10px;
   border: 1px solid #9ba7b5;
   border-radius: 6px;
-  color: var(--color-sx);
-  font: 400 16px/1.4 "Lato", sans-serif;
 }
 
 @media (min-width: 480px) {
@@ -452,30 +450,20 @@
 }
 
 .landing-page-example-cta {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
   justify-self: center;
   inline-size: min(100%, 22rem);
   min-block-size: 44px;
   padding: 8px 14px;
-  border: 0;
   border-radius: 6px;
   background: var(--color-s);
   color: var(--color-sx);
   font: 900 16px/1.35 "Lato", sans-serif;
-  cursor: pointer;
-}
-
-.landing-page-example-cta:hover {
-  background: var(--color-qi);
-  color: #fff;
-}
-
-.landing-page-example :is(input, button):focus-visible {
-  outline: 2px solid var(--color-qi);
-  outline-offset: 2px;
 }
 
 .landing-page-example figcaption {
-  min-block-size: 2.8em;
   margin-block-start: 8px;
   color: #56564e;
 }

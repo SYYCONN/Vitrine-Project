@@ -8,11 +8,11 @@ function Header(){
                     <img src='./public/icon-vitrine.png' />
                 </div>
                 <nav className="header-actions">
-                    <a>SOBRE</a>
+                    <a href="#sobre">SOBRE</a>
                     <a href="#servicos">SERVIÇOS</a>
-                    <a>PROCESSO</a>
-                    <a>PORTFÓLIO</a>
-                    <a>DEPOIMENTOS</a>
+                    <a href="#processo">PROCESSO</a>
+                    <a href="#portifolio">PORTFÓLIO</a>
+                    <a href="#depoimentos">DEPOIMENTOS</a>
                 </nav>
                 <div className="header-btn">
                     <button>Solicitar Contato</button>
