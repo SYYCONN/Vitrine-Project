@@ -9,7 +9,7 @@ function Header(){
                 </div>
                 <nav className="header-actions">
                     <a>SOBRE</a>
-                    <a>SERVIÇOS</a>
+                    <a href="#servicos">SERVIÇOS</a>
                     <a>PROCESSO</a>
                     <a>PORTFÓLIO</a>
                     <a>DEPOIMENTOS</a>
