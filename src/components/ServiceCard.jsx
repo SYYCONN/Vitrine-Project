@@ -13,8 +13,8 @@ function ServiceCard({ icon: Icon, title, badge, description, action }) {
       )}
       <h3>{title}</h3>
       <p>{description}</p>
-      {action && (
-        action.href ? (
+      {action &&
+        (action.href ? (
           <a className="service-card-action" href={action.href}>
             {action.label}
           </a>
@@ -22,8 +22,7 @@ function ServiceCard({ icon: Icon, title, badge, description, action }) {
           <button className="service-card-action" type="button" disabled>
             {action.label}
           </button>
-        )
-      )}
+        ))}
     </article>
   );
 }
