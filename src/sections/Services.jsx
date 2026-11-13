@@ -78,7 +78,7 @@ function LandingPageInfo() {
     >
       <div className="container">
         <div className="landing-page-info-intro">
-          <h2 id="landing-page-info-title">O que é uma landing page?</h2>
+          <h2 id="landing-page-info-title">O que é uma Landing Page?</h2>
           <p>
             É uma página feita para mostrar o que você oferece e indicar o
             próximo passo.
