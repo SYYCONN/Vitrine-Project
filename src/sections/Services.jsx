@@ -38,7 +38,7 @@ const services = [
     title: "Design que valoriza",
     description:
       "Visual moderno, com as cores da sua marca, que passa confiança logo de cara.",
-    action: { label: "Ver exemplos de layout" },
+    action: { label: "Ver exemplos de layout", href: "#layouts" },
   },
   {
     id: "ajustes-e-cuidado",

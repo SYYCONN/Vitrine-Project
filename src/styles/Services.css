@@ -26,45 +26,28 @@
   box-sizing: border-box;
 }
 
-.services-intro h2 {
-  position: relative;
-  margin: 0 0 18px;
+:is(.services-intro, .landing-page-info-intro) h2 {
   color: var(--color-sx);
-  font: 600 40px/1.15 "Lato", sans-serif;
+  font: 400 40px/1.15 "Bruno Ace", sans-serif;
+}
+
+:is(.services-intro, .landing-page-info-intro) p {
+  font: 400 16px/1.7 "Lato", sans-serif;
+}
+
+@media (max-width: 520px) {
+  :is(.services-intro, .landing-page-info-intro) h2 { font-size: 32px; }
+}
+
+.services-intro h2 {
+  margin: 0 0 18px;
   text-align: center;
-}
-
-.services-section:target .services-intro h2::after {
-  position: absolute;
-  inset-block-end: -8px;
-  inset-inline: 0;
-  width: 48px;
-  height: 3px;
-  margin-inline: auto;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--color-s), var(--color-t));
-  content: "";
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .services-section:target .services-intro h2::after {
-    transform-origin: left;
-    animation: services-accent-in 650ms ease-out 160ms both;
-  }
-}
-
-@keyframes services-accent-in {
-  from {
-    opacity: 0;
-    transform: scaleX(0);
-  }
 }
 
 .services-intro p {
   max-width: 84ch;
   margin: 0 auto;
   color: #56564e;
-  font: 400 19px/1.45 "Lato", sans-serif;
   text-align: center;
 }
 
@@ -268,16 +251,16 @@
 
 .landing-page-info-intro h2 {
   margin: 0 0 16px;
-  font: 600 40px/1.15 "Lato", sans-serif;
 }
 
-.landing-page-info-intro h2::after {
+#services-title::after,
+#landing-page-info-title::after {
   display: block;
   inline-size: 48px;
-  block-size: 3px;
-  margin: 12px auto 0;
+  block-size: 2px;
+  margin: 10px auto 0;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--color-s), var(--color-t));
+  background: var(--color-t);
   content: "";
 }
 
@@ -285,7 +268,6 @@
   max-inline-size: 72ch;
   margin: 0 auto;
   color: #56564e;
-  font: 400 18px/1.55 "Lato", sans-serif;
 }
 
 .landing-page-info-layout {
