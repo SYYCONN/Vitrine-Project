@@ -11,7 +11,7 @@ function Header(){
                     <a href="#sobre">SOBRE</a>
                     <a href="#servicos">SERVIÇOS</a>
                     <a href="#processo">PROCESSO</a>
-                    <a href="#portifolio">PORTFÓLIO</a>
+                    <a href="#portfolio">PORTFÓLIO</a>
                     <a href="#depoimentos">DEPOIMENTOS</a>
                 </nav>
                 <div className="header-btn">
