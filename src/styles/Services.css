@@ -225,7 +225,7 @@
 
 .service-card-action:disabled {
   opacity: 1;
-  cursor: not-allowed;
+  cursor: none;
 }
 
 /* Explicação da landing page */

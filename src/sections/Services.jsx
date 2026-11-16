@@ -22,7 +22,7 @@ const services = [
     badge: "100% gratuito",
     description:
       "Uma página única, pensada para o seu negócio, seus produtos e seu público.",
-    action: { label: "Solicitar minha página" },
+    action: { label: "Solicitar minha página", href: "#contato" },
   },
   {
     id: "rede-profissionais",
@@ -30,7 +30,7 @@ const services = [
     title: "Rede de profissionais",
     description:
       "Encontre o talento criativo certo para o seu projeto, seja em design, vídeo ou animação.",
-    action: { label: "Explorar Vitrine de profissionais" },
+    action: { label: "Explorar Vitrine de profissionais", href: "#contato" },
   },
   {
     id: "design",
@@ -46,7 +46,7 @@ const services = [
     title: "Ajustes e cuidado",
     description:
       "Acompanhamos a página depois de publicada e fazemos melhorias quando precisar.",
-    action: { label: "Entre em contato conosco" },
+    action: { label: "Entre em contato conosco", href: "#contato" },
   },
 ];
 
