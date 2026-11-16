@@ -26,10 +26,21 @@
   box-sizing: border-box;
 }
 
+:is(.services-intro, .landing-page-info-intro) h2 {
+  color: var(--color-sx);
+  font: 400 40px/1.15 "Bruno Ace", sans-serif;
+}
+
+:is(.services-intro, .landing-page-info-intro) p {
+  font: 400 16px/1.7 "Lato", sans-serif;
+}
+
+@media (max-width: 520px) {
+  :is(.services-intro, .landing-page-info-intro) h2 { font-size: 32px; }
+}
+
 .services-intro h2 {
   margin: 0 0 18px;
-  color: var(--color-sx);
-  font: 600 40px/1.15 "Lato", sans-serif;
   text-align: center;
 }
 
@@ -37,7 +48,6 @@
   max-width: 84ch;
   margin: 0 auto;
   color: #56564e;
-  font: 400 19px/1.45 "Lato", sans-serif;
   text-align: center;
 }
 
@@ -241,8 +251,6 @@
 
 .landing-page-info-intro h2 {
   margin: 0 0 16px;
-  color: var(--color-sx);
-  font: 600 40px/1.15 "Lato", sans-serif;
 }
 
 #services-title::after,
@@ -260,7 +268,6 @@
   max-inline-size: 72ch;
   margin: 0 auto;
   color: #56564e;
-  font: 400 18px/1.55 "Lato", sans-serif;
 }
 
 .landing-page-info-layout {

@@ -1,9 +1,9 @@
-function ProjectCard({ project, onOpen, onHover, onLeave }) {
+function ProjectCard({ project, onOpen }) {
   const { name, description, screenshots } = project;
   const [cover] = screenshots;
 
   return (
-    <article className="projects-layout-card project-card" onPointerEnter={onHover} onPointerLeave={onLeave}>
+    <article className="projects-layout-card project-card">
       <div className="project-card-cover">
         <img src={cover.src} alt={cover.alt} width={cover.width} height={cover.height} decoding="async" draggable={false} />
       </div>

@@ -309,9 +309,9 @@ function LayoutWireframe({ type, interactive = false }) {
   );
 }
 
-function LayoutCard({ layout, onOpen, onHover, onLeave }) {
+function LayoutCard({ layout, onOpen }) {
   return (
-    <article className="projects-layout-card" onPointerEnter={onHover} onPointerLeave={onLeave}>
+    <article className="projects-layout-card">
       <div className="projects-layout-cover" aria-hidden="true">
         <LayoutWireframe type={layout.id} />
       </div>
@@ -394,7 +394,6 @@ function GalleryTrack({ id, titleId, portfolio = false, children }) {
 
 function useGalleryPreview() {
   const dialogRef = useRef(null);
-  const hoverTimer = useRef(null);
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
@@ -402,42 +401,43 @@ function useGalleryPreview() {
     if (selected && !dialog.open) dialog.showModal();
   }, [selected]);
 
-  useEffect(() => () => window.clearTimeout(hoverTimer.current), []);
-
-  function cancelHover() {
-    window.clearTimeout(hoverTimer.current);
-  }
-
-  function open(item) {
-    cancelHover();
-    setSelected(item);
-  }
-
-  function hover(event, item) {
-    if (event.pointerType !== "mouse" || dialogRef.current.open) return;
-    cancelHover();
-    hoverTimer.current = window.setTimeout(() => open(item), 420);
-  }
-
-  return { dialogRef, selected, open, hover, cancelHover, clear: () => setSelected(null) };
+  return { dialogRef, selected, open: setSelected, clear: () => setSelected(null) };
 }
 
 function GalleryPreview({ preview, id, title, description, children }) {
   const { dialogRef, clear } = preview;
   const startedOnBackdrop = useRef(false);
+  const [closing, setClosing] = useState(false);
+
+  function closePreview() {
+    setClosing(true);
+  }
 
   return (
     <dialog
       ref={dialogRef}
       className="projects-layout-dialog"
       aria-labelledby={id}
+      data-closing={closing || undefined}
+      onCancel={(event) => {
+        event.preventDefault();
+        closePreview();
+      }}
+      onAnimationEnd={(event) => {
+        if (event.target === event.currentTarget && event.animationName === "projects-layout-exit") {
+          event.currentTarget.close();
+        }
+      }}
       onPointerDown={(event) => { startedOnBackdrop.current = isLayoutBackdrop(event); }}
       onPointerCancel={() => { startedOnBackdrop.current = false; }}
       onClick={(event) => {
-        if (startedOnBackdrop.current && isLayoutBackdrop(event)) event.currentTarget.close();
+        if (startedOnBackdrop.current && isLayoutBackdrop(event)) closePreview();
         startedOnBackdrop.current = false;
       }}
-      onClose={clear}
+      onClose={() => {
+        setClosing(false);
+        clear();
+      }}
     >
       {preview.selected && (
         <>
@@ -446,7 +446,7 @@ function GalleryPreview({ preview, id, title, description, children }) {
               <h4 id={id}>{title}</h4>
               {description && <p>{description}</p>}
             </div>
-            <button type="button" onClick={() => dialogRef.current.close()}>Fechar</button>
+            <button type="button" onClick={closePreview}>Fechar</button>
           </div>
           <div className="projects-layout-scroll" role="region" aria-label={title} tabIndex={0}>
             {children}
@@ -465,7 +465,7 @@ function LayoutGallery() {
       <div>
         <h3 id="projects-layouts-title">Layouts</h3>
         <p id="projects-layouts-hint" className="projects-layout-hint">
-          Passe o mouse sobre um modelo ou escolha “Ver modelo” para testar a página.
+          Clique em “Ver modelo” para testar a página.
         </p>
       </div>
       <GalleryTrack id="projects-layout-track" titleId="projects-layouts-title">
@@ -474,8 +474,6 @@ function LayoutGallery() {
             key={layout.id}
             layout={layout}
             onOpen={() => preview.open(layout)}
-            onHover={(event) => preview.hover(event, layout)}
-            onLeave={preview.cancelHover}
           />
         ))}
       </GalleryTrack>
@@ -497,8 +495,6 @@ function PortfolioGallery() {
             key={project.id}
             project={project}
             onOpen={() => preview.open(project)}
-            onHover={(event) => preview.hover(event, project)}
-            onLeave={preview.cancelHover}
           />
         ))}
         <div className="projects-layout-card projects-coming-soon">
