@@ -1,13 +1,16 @@
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Mail } from "lucide-react";
 import "../styles/Footer.css";
 
 const navigation = [
   { href: "#sobre", label: "Sobre" },
   { href: "#servicos", label: "Serviços" },
+  { href: "#processo", label: "Processo" },
   { href: "#portfolio", label: "Portfólio" },
   { href: "#layouts", label: "Layouts" },
   { href: "#faq", label: "Perguntas frequentes" },
 ];
+
+const EMAIL = "vitrinepages@gmail.com";
 
 const year = new Date().getFullYear();
 
@@ -26,13 +29,19 @@ function Footer() {
             </p>
           </div>
 
-          <nav aria-label="Rodapé">
-            <ul className="footer-links">
-              {navigation.map(({ href, label }) => (
-                <li key={href}><a href={href}>{label}</a></li>
-              ))}
-            </ul>
-          </nav>
+          <div className="footer-side">
+            <nav aria-label="Rodapé">
+              <ul className="footer-links">
+                {navigation.map(({ href, label }) => (
+                  <li key={href}><a href={href}>{label}</a></li>
+                ))}
+              </ul>
+            </nav>
+            <a href={`mailto:${EMAIL}`} className="footer-email">
+              <Mail size={16} aria-hidden="true" />
+              {EMAIL}
+            </a>
+          </div>
         </div>
 
         <div className="footer-bottom">

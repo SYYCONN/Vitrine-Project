@@ -93,7 +93,7 @@ Todos os botões de contato do site abrem o mesmo modal ([`ContactModal.jsx`](sr
 - **Para um botão ou link abrir o modal**, adicione o atributo `data-contact` com o assunto que deve vir escolhido: `landing-page`, `profissionais` ou `duvida`. Exemplo: `<button type="button" data-contact="landing-page">Fale conosco</button>`.
 - **O Netlify só reconhece o formulário pela cópia escondida no [`index.html`](index.html)**, porque o React monta a página depois. Se adicionar, remover ou renomear um campo no modal, faça o mesmo no `index.html`.
 - **No servidor local (`npm run dev`) o envio sempre mostra erro**, porque não há Netlify por trás. Teste o envio no site publicado.
-- **Envios e notificações** ficam no painel do Netlify, em **Forms**. O e-mail que recebe os pedidos é configurado em **Forms → Form submission notifications**.
+- **Envios e notificações** ficam no painel do Netlify, em **Forms**. As notificações vão para o e-mail do projeto, **vitrinepages@gmail.com**, configurado em **Forms → Form submission notifications**. O mesmo e-mail aparece no rodapé (constante `EMAIL` em [`Footer.jsx`](src/sections/Footer.jsx)).
 
 ## Como contribuir
 
@@ -138,7 +138,8 @@ Também em `global.css`, `--section-line` define a cor das linhas divisórias. O
 - [x] Layout responsivo para celular e tablet
 - [x] Deploy
 - [ ] Seção Depoimentos (quando houver depoimentos reais, com autorização dos clientes, e voltar o link ao menu)
-- [ ] Canais de contato diretos (WhatsApp, e-mail, redes sociais) no rodapé
+- [x] E-mail de contato no rodapé
+- [ ] WhatsApp e redes sociais no rodapé
 
 ## Licença
 

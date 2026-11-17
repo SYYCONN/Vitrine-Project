@@ -49,7 +49,29 @@
   border-inline-start: 1px solid var(--footer-line);
 }
 
-/* Links */
+/* Links e e-mail */
+
+.footer-side {
+  display: grid;
+  justify-items: end;
+  gap: 12px;
+}
+
+.footer-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-s);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.footer-email:hover {
+  color: var(--color-p);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 
 .footer-links {
   display: flex;
@@ -110,5 +132,6 @@
   .footer-brand { flex-direction: column; align-items: flex-start; gap: 12px; }
   .footer-brand p { padding-inline-start: 0; border-inline-start: 0; }
   .footer-links { gap: 8px 20px; }
+  .footer-side { justify-items: start; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
