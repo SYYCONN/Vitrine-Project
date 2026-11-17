@@ -1,7 +1,7 @@
 /* ===== Contato (modal com formulário) ===== */
 
 .contact-modal {
-  --contact-line: color-mix(in srgb, var(--color-qi) 22%, #fff);
+  --contact-line: var(--section-line);
   --contact-exit-duration: 1ms;
   box-sizing: border-box;
   inline-size: min(36rem, calc(100vw - 32px));
@@ -11,14 +11,14 @@
   overscroll-behavior: contain;
   border: 0;
   border-radius: 18px;
-  background: var(--color-p);
+  background: var(--bg);
   box-shadow: 0 24px 60px color-mix(in srgb, var(--color-qi) 28%, transparent);
-  color: var(--color-sx);
+  color: var(--text);
   font: 400 15px/1.5 "Lato", sans-serif;
 }
 
 .contact-modal::backdrop {
-  background: color-mix(in srgb, var(--color-sx) 62%, transparent);
+  background: var(--backdrop);
   backdrop-filter: blur(3px);
 }
 
@@ -39,14 +39,14 @@
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--color-sx);
+  color: var(--text);
   cursor: pointer;
   transition: background-color .2s, color .2s;
 }
 
 .contact-close:hover {
   background: color-mix(in srgb, var(--color-qi) 8%, transparent);
-  color: var(--color-qi);
+  color: var(--accent);
 }
 
 /* Cabeçalho */
@@ -63,7 +63,7 @@
 
 .contact-header p {
   margin: 0;
-  color: #56564e;
+  color: var(--text-muted);
 }
 
 /* Formulário */
@@ -89,7 +89,7 @@
 }
 
 .contact-field small {
-  color: #56564e;
+  color: var(--text-muted);
   font-weight: 400;
 }
 
@@ -99,8 +99,8 @@
   padding: 11px 14px;
   border: 1px solid var(--contact-line);
   border-radius: 10px;
-  background: #fff;
-  color: var(--color-sx);
+  background: var(--surface);
+  color: var(--text);
   font: 400 15px/1.4 "Lato", sans-serif;
   transition: border-color .2s, box-shadow .2s;
 }
@@ -111,7 +111,7 @@
 }
 
 .contact-field :is(input, select, textarea)::placeholder {
-  color: #8a8a80;
+  color: var(--text-placeholder);
 }
 
 .contact-field :is(input, select, textarea):focus {
@@ -124,7 +124,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  color: #45453d;
+  color: var(--text-body);
   font-size: 14px;
   cursor: pointer;
 }
@@ -134,7 +134,7 @@
   inline-size: 18px;
   block-size: 18px;
   margin: 1px 0 0;
-  accent-color: var(--color-qi);
+  accent-color: var(--accent);
 }
 
 .contact-honeypot {
@@ -149,8 +149,8 @@
   margin: 0;
   padding: 10px 14px;
   border-radius: 10px;
-  background: #fdecec;
-  color: #a12626;
+  background: var(--danger-bg);
+  color: var(--danger-text);
   font-size: 14px;
 }
 
@@ -160,7 +160,7 @@
   border: 0;
   border-radius: 8px;
   background: var(--color-qi);
-  color: #fff;
+  color: var(--text-on-accent);
   font: 700 16px/1.2 "Lato", sans-serif;
   cursor: pointer;
   transition: background-color .2s, transform .2s;
@@ -178,7 +178,7 @@
 
 .contact-modal :is(button, select, a):focus-visible,
 .contact-consent input:focus-visible {
-  outline: 2px solid var(--color-qi);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -192,12 +192,12 @@
   text-align: center;
 }
 
-.contact-success svg { color: var(--color-qi); }
+.contact-success svg { color: var(--accent); }
 
 .contact-success p {
   max-inline-size: 34ch;
   margin: 0 0 16px;
-  color: #56564e;
+  color: var(--text-muted);
 }
 
 /* Animações */

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 import '../styles/global.css'
 
 const links = [
@@ -62,6 +63,7 @@ function Header(){
                         <button type="button" data-contact="landing-page" onClick={close}>Solicitar Contato</button>
                     </div>
                 </div>
+                <ThemeToggle />
             </div>
         </header>
     )

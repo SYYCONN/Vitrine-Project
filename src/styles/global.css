@@ -9,7 +9,55 @@
   --color-qi: #0c57b1;
   --color-sx: #23231c;
 
-  --section-line: color-mix(in srgb, var(--color-qi) 22%, #fff);
+  /*
+   * Cores por função. Os componentes usam estas variáveis, não a paleta
+   * acima nem cores fixas: assim um tema (ex.: modo escuro) só precisa
+   * redefinir este bloco.
+   */
+  --bg: var(--color-p);              /* fundo da página e dos modais */
+  --surface: #fff;                   /* cards, campos, botões claros */
+  --text: var(--color-sx);           /* texto principal */
+  --text-body: #45453d;              /* parágrafos longos (respostas, formulário) */
+  --text-muted: #56564e;             /* texto secundário */
+  --text-faint: #666;                /* legendas e apoio */
+  --text-placeholder: #8a8a80;
+  --text-on-accent: #fff;            /* texto sobre botões e fundos de cor */
+  --border: rgb(117 116 116);        /* linhas neutras (cabeçalho, botão do hero) */
+  --border-soft: rgb(117 116 116 / .3);
+  --section-line: color-mix(in srgb, var(--color-qi) 22%, var(--surface));
+  --accent-soft: color-mix(in srgb, var(--color-s) 18%, var(--surface));
+  --backdrop: color-mix(in srgb, var(--color-sx) 62%, transparent);
+  --danger-bg: #fdecec;
+  --danger-text: #a12626;
+  --accent: var(--color-qi);         /* títulos de destaque, links, ícones e contornos de foco */
+
+  color-scheme: light;
+}
+
+/*
+ * Modo escuro. O tema é decidido antes da página aparecer, pelo script
+ * no <head> do index.html (escolha salva ou preferência do sistema), e
+ * trocado pelo botão do cabeçalho (src/components/ThemeToggle.jsx).
+ * Botões com fundo --color-qi continuam iguais: o texto branco segue legível.
+ */
+:root[data-theme="dark"] {
+  --bg: #0e131b;
+  --surface: #171e29;
+  --text: #ecebe4;
+  --text-body: #d0cfc7;
+  --text-muted: #b4b3aa;
+  --text-faint: #a3a39b;
+  --text-placeholder: #7f7f78;
+  --border: rgb(160 160 160);
+  --border-soft: rgb(255 255 255 / .14);
+  --section-line: color-mix(in srgb, var(--color-t) 24%, var(--surface));
+  --accent-soft: color-mix(in srgb, var(--color-s) 16%, var(--surface));
+  --backdrop: rgb(0 0 0 / .7);
+  --danger-bg: #3b1d20;
+  --danger-text: #ffa4a4;
+  --accent: #74bcff;
+
+  color-scheme: dark;
 }
 
 /* ===== Divisória entre seções (padrão do site) ===== */
@@ -43,7 +91,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-p);
+  background: var(--bg);
+  color: var(--text);
   background-image: url("/fundo.png");
   
 }
@@ -62,7 +111,7 @@ header {
   align-items: center;
 
   width: 85%;
-  border-bottom: 1px solid rgb(117, 116, 116);
+  border-bottom: 1px solid var(--border);
 }
 
 .header-logo {
@@ -106,7 +155,7 @@ header {
   font-family: "Lato", sans-serif;
   font-weight: 600;
   font-style: normal;
-  color: black;
+  color: var(--text);
   text-decoration: none;
   transition: all 0.2s;
   cursor: pointer;
@@ -114,7 +163,7 @@ header {
 
 .header-actions a:hover,
 .header-actions a:focus-visible {
-  color: var(--color-qi);
+  color: var(--accent);
   transform: scale(1.1);
 }
 
@@ -123,7 +172,38 @@ header {
 }
 
 .header-btn {
+  grid-column: 3;
+  grid-row: 1;
   justify-self: end;
+  /* espaço para o botão de tema, que divide a mesma célula da grade */
+  margin-inline-end: 52px;
+}
+
+.theme-toggle {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--section-line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--accent);
+  cursor: pointer;
+  transition: border-color .2s, transform .2s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-t);
+  transform: rotate(-12deg);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .header-btn button {
@@ -132,7 +212,7 @@ header {
   padding: 0 20px;
   white-space: nowrap;
 
-  color:white;
+  color: var(--text-on-accent);
   font-size: 14px;
   font-family: "Lato", sans-serif;
 
@@ -143,7 +223,7 @@ header {
   border-radius: 5px;
   border: none;
 
-  color: white;
+  color: var(--text-on-accent);
   background: linear-gradient(90deg, var(--color-s), var(--color-t));
 
   cursor: pointer;
@@ -199,7 +279,7 @@ header {
     max-width: 520px;
 
     font-family: "Bruno Ace", sans-serif;
-    color: #666;   
+    color: var(--text-faint);
     font-size: 14px;
     line-height: 1.7;
 
@@ -223,7 +303,7 @@ header {
 
     background: var(--color-s);
 
-    color:white;
+    color: var(--text-on-accent);
     font-size: 16px;
     font-weight: 500;
 
@@ -243,12 +323,12 @@ header {
 .hero-btn button:nth-child(2){
     padding: 16px 28px;
 
-    border: 1px solid rgb(117, 116, 116);
+    border: 1px solid var(--border);
     border-radius: 6px;
 
     background: transparent;
 
-    color:rgb(117, 116, 116);
+    color: var(--border);
     font-size: 16px;
     font-weight: 500;
 
@@ -259,7 +339,7 @@ header {
 .hero-btn button:nth-child(2):hover{
     background-color: var(--color-qi);
     opacity:initial;
-    color: white;
+    color: var(--text-on-accent);
     transform: scale(1.05);
 }
 
@@ -292,7 +372,7 @@ header {
     gap: 12px;
 
     border-radius: 6px;
-    border: 0.1px solid #666;
+    border: 0.1px solid var(--text-faint);
 
     padding: 10px;
 
@@ -316,7 +396,7 @@ header {
 .benefit-item span{
     font-family: "Lato", sans-serif;
     font-size:14px;
-    color: #666;
+    color: var(--text-faint);
     white-space: nowrap;
 }
 
@@ -330,7 +410,7 @@ header {
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--color-qi);
+    color: var(--accent);
 }
 
 .highlight-text {
@@ -368,6 +448,15 @@ header {
 
   .header-logo img:hover { transform: none; }
 
+  .theme-toggle {
+    order: 1;
+    width: 44px;
+    height: 44px;
+    margin-inline: auto 8px;
+  }
+
+  .header-toggle { order: 2; }
+
   .header-toggle {
     display: grid;
     place-items: center;
@@ -376,8 +465,8 @@ header {
     padding: 0;
     border: 1px solid var(--section-line);
     border-radius: 10px;
-    background: #fff;
-    color: var(--color-qi);
+    background: var(--surface);
+    color: var(--accent);
     cursor: pointer;
   }
 
@@ -391,7 +480,7 @@ header {
     padding: 12px;
     border: 1px solid var(--section-line);
     border-radius: 14px;
-    background: var(--color-p);
+    background: var(--bg);
     box-shadow: 0 16px 40px color-mix(in srgb, var(--color-qi) 18%, transparent);
     opacity: 0;
     visibility: hidden;
@@ -409,6 +498,12 @@ header {
   .header-actions,
   .header-btn {
     justify-self: stretch;
+  }
+
+  .header-btn {
+    grid-column: auto;
+    grid-row: auto;
+    margin-inline-end: 0;
   }
 
   .header-actions {

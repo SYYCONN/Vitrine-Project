@@ -1,10 +1,10 @@
 /* ===== Portfólio ===== */
 
 .projects-section {
-  --projects-line: color-mix(in srgb, var(--color-qi) 22%, #fff);
-  --projects-soft: color-mix(in srgb, var(--color-s) 18%, #fff);
+  --projects-line: var(--section-line);
+  --projects-soft: var(--accent-soft);
   padding-block: 48px 64px;
-  color: var(--color-sx);
+  color: var(--text);
   font: 400 16px/1.5 "Lato", sans-serif;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .projects-portfolio-hint {
-  text-shadow: 1px 0 var(--color-p), -1px 0 var(--color-p);
+  text-shadow: 1px 0 var(--bg), -1px 0 var(--bg);
 }
 
 .projects-portfolio-gallery {
@@ -57,12 +57,12 @@
 
 .projects-coming-soon {
   border-style: dashed;
-  background: var(--color-p);
+  background: var(--bg);
 }
 
 .projects-coming-cover {
   place-items: center;
-  background: color-mix(in srgb, var(--color-s) 9%, var(--color-p));
+  background: color-mix(in srgb, var(--color-s) 9%, var(--bg));
 }
 
 .projects-coming-cover span {
@@ -72,14 +72,14 @@
   aspect-ratio: 1;
   border: 1px solid var(--projects-line);
   border-radius: 50%;
-  background: var(--color-p);
-  color: var(--color-qi);
+  background: var(--bg);
+  color: var(--accent);
   font: 400 27px/1 "Lato", sans-serif;
 }
 
 .projects-coming-soon .projects-coming-title {
   margin: 0;
-  color: var(--color-sx);
+  color: var(--text);
   font: 900 15px/1.25 "Lato", sans-serif;
 }
 
@@ -88,6 +88,8 @@
     grid-auto-columns: calc((100% - var(--layout-gap)) / 2);
   }
 }
+
+/* Os wireframes dos layouts imitam sites de clientes: mantêm cores fixas, claras em qualquer tema */
 
 .projects-section {
   --wire-border: #bdbdbd;
@@ -112,7 +114,7 @@
 
 .projects-layout-hint {
   margin: 6px 0 0;
-  color: var(--color-sx);
+  color: var(--text);
   font-size: 14px;
   text-align: center;
 }
@@ -157,7 +159,7 @@
   border-radius: 50%;
   background: var(--color-qi);
   box-shadow: 0 3px 8px color-mix(in srgb, var(--color-qi) 24%, transparent);
-  color: #fff;
+  color: var(--text-on-accent);
   cursor: pointer;
 }
 
@@ -173,7 +175,7 @@
 
 .projects-layout-arrow[aria-disabled="true"] {
   background: var(--projects-soft);
-  color: var(--color-qi);
+  color: var(--accent);
   cursor: default;
 }
 
@@ -183,8 +185,8 @@
   scroll-snap-align: start;
   border: 1px solid var(--wire-border);
   border-radius: 12px;
-  background: #fff;
-  color: var(--color-sx);
+  background: var(--surface);
+  color: var(--text);
 }
 
 .projects-layout-cover {
@@ -219,13 +221,13 @@
 
 .projects-layout-caption :is(h3, h4) {
   margin: 0;
-  color: var(--color-qi);
+  color: var(--accent);
   font: 900 15px/1.25 "Lato", sans-serif;
 }
 
 .projects-layout-caption p {
   margin: 4px 0 0;
-  color: var(--color-sx);
+  color: var(--text);
   font-size: 12px;
   line-height: 1.3;
 }
@@ -235,15 +237,15 @@
   padding: 6px 12px;
   border: 1px solid var(--color-qi);
   border-radius: 8px;
-  background: #fff;
-  color: var(--color-qi);
+  background: var(--surface);
+  color: var(--accent);
   font: 700 12px/1.35 "Lato", sans-serif;
   cursor: pointer;
 }
 
 .projects-layout-caption button:hover {
   background: var(--color-qi);
-  color: #fff;
+  color: var(--text-on-accent);
 }
 
 .projects-layout-card .projects-layout-caption :is(h3, h4),
@@ -257,6 +259,20 @@
 
 .projects-layout-card .projects-layout-caption button:hover {
   background: #eaeaea;
+}
+
+/* No escuro o card fica escuro, então a legenda deixa o cinza do wireframe */
+:root[data-theme="dark"] .projects-layout-card .projects-layout-caption :is(h3, h4),
+:root[data-theme="dark"] .projects-layout-card .projects-layout-caption button {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .projects-layout-card .projects-layout-caption button {
+  border-color: var(--border);
+}
+
+:root[data-theme="dark"] .projects-layout-card .projects-layout-caption button:hover {
+  background: var(--border-soft);
 }
 
 /* ===== Modal de prévia (Portfólio e Layouts) ===== */
@@ -279,9 +295,9 @@
   overscroll-behavior: contain;
   border: 0;
   border-radius: 18px;
-  background: var(--color-p);
+  background: var(--bg);
   box-shadow: 0 24px 60px color-mix(in srgb, var(--color-qi) 28%, transparent);
-  color: var(--color-sx);
+  color: var(--text);
   font: 400 16px/1.5 "Lato", sans-serif;
 }
 
@@ -290,7 +306,7 @@
 .projects-preview:focus { outline: none; }
 
 .projects-preview::backdrop {
-  background: color-mix(in srgb, var(--color-sx) 62%, transparent);
+  background: var(--backdrop);
   backdrop-filter: blur(3px);
 }
 
@@ -316,7 +332,7 @@
 .projects-preview-media.projects-layout-scroll {
   overflow: auto;
   background: #fafafa;
-  scrollbar-color: var(--color-t) color-mix(in srgb, var(--color-s) 12%, #fff);
+  scrollbar-color: var(--color-t) color-mix(in srgb, var(--color-s) 12%, var(--surface));
 }
 
 /* Fechar */
@@ -333,16 +349,16 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--color-p) 94%, transparent);
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
   box-shadow: 0 4px 14px rgb(0 0 0 / .18);
-  color: var(--color-qi);
+  color: var(--accent);
   cursor: pointer;
   transition: background-color .2s, color .2s, transform .2s;
 }
 
 .projects-preview-close:hover {
   background: var(--color-qi);
-  color: #fff;
+  color: var(--text-on-accent);
   transform: scale(1.06);
 }
 
@@ -364,7 +380,7 @@
 
 .projects-preview-eyebrow {
   display: block;
-  color: var(--color-qi);
+  color: var(--accent);
   font: 700 12px/1.3 "Lato", sans-serif;
   letter-spacing: 2.5px;
   text-transform: uppercase;
@@ -372,13 +388,13 @@
 
 .projects-preview-text h4 {
   margin: 6px 0 0;
-  color: var(--color-sx);
+  color: var(--text);
   font: 400 24px/1.2 "Bruno Ace", sans-serif;
 }
 
 .projects-preview-text p {
   margin: 6px 0 0;
-  color: #56564e;
+  color: var(--text-muted);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -391,7 +407,7 @@
 
 .projects-preview-stepper span {
   min-inline-size: 3.5ch;
-  color: var(--color-sx);
+  color: var(--text);
   font: 700 14px/1 "Lato", sans-serif;
   font-variant-numeric: tabular-nums;
   text-align: center;
@@ -406,13 +422,13 @@
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--color-sx);
+  color: var(--text);
   cursor: pointer;
   transition: color .2s, transform .2s;
 }
 
 .projects-preview-stepper button:hover {
-  color: var(--color-qi);
+  color: var(--accent);
   transform: scale(1.12);
 }
 
@@ -433,8 +449,8 @@
   padding: 8px 16px;
   border: 1px solid var(--projects-line);
   border-radius: 999px;
-  background: #fff;
-  color: var(--color-sx);
+  background: var(--surface);
+  color: var(--text);
   font: 700 13px/1.2 "Lato", sans-serif;
   cursor: pointer;
   transition: border-color .2s, color .2s, background-color .2s;
@@ -442,13 +458,13 @@
 
 .projects-preview-tabs button:hover {
   border-color: var(--color-t);
-  color: var(--color-qi);
+  color: var(--accent);
 }
 
 .projects-preview-tabs button[aria-current] {
   border-color: var(--color-qi);
   background: var(--color-qi);
-  color: #fff;
+  color: var(--text-on-accent);
 }
 
 /* Animações */
@@ -873,15 +889,15 @@
 }
 
 .projects-section :is(button, a, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-qi);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
 #projects-title,
 #projects-layouts-title {
-  color: var(--color-sx);
-  text-shadow: 1px 0 var(--color-p), -1px 0 var(--color-p),
-    0 1px var(--color-p), 0 -1px var(--color-p);
+  color: var(--text);
+  text-shadow: 1px 0 var(--bg), -1px 0 var(--bg),
+    0 1px var(--bg), 0 -1px var(--bg);
 }
 
 #projects-title::after,

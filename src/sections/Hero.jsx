@@ -11,7 +11,7 @@ function Hero() {
             <div className="hero-title">
               <h1>
                 Landing Pages que <br />
-                transformam visitas
+                transformam visitas{" "}
                 <br />
                 em clientes.
               </h1>

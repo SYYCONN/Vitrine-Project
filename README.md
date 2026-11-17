@@ -27,7 +27,8 @@ Vitrine-Project/
 │   │   ├── ProjectCard.jsx
 │   │   ├── FAQItem.jsx
 │   │   ├── ContactModal.jsx # Modal com o formulário de contato (Netlify Forms)
-│   │   └── Select.jsx      # Select próprio e acessível, usado no formulário
+│   │   ├── Select.jsx      # Select próprio e acessível, usado no formulário
+│   │   └── ThemeToggle.jsx # Botão de modo claro/escuro no cabeçalho
 │   ├── hooks/
 │   │   └── useCleanHashLinks.js # Links internos (#secao) sem deixar o # na URL
 │   ├── sections/           # Seções da página, na ordem em que aparecem
@@ -122,7 +123,27 @@ As cores estão definidas como variáveis em `src/styles/global.css`:
 | `--color-qi`   | `#0c57b1` |
 | `--color-sx`   | `#23231c` |
 
-Também em `global.css`, `--section-line` define a cor das linhas divisórias. O rodapé usa um azul-marinho próprio, derivado de `--color-qi`, definido em `Footer.css`.
+Logo abaixo da paleta ficam as **cores por função**, que são as que os componentes devem usar:
+
+| Variável            | Uso                                               |
+| ------------------- | ------------------------------------------------- |
+| `--bg`              | Fundo da página e dos modais                      |
+| `--surface`         | Cards, campos e botões claros                     |
+| `--text`            | Texto principal                                   |
+| `--text-body`       | Parágrafos longos (respostas do FAQ, formulário)  |
+| `--text-muted`      | Texto secundário                                  |
+| `--text-faint`      | Legendas e textos de apoio                        |
+| `--text-placeholder`| Placeholder dos campos                            |
+| `--text-on-accent`  | Texto sobre botões e fundos coloridos             |
+| `--border`, `--border-soft` | Linhas neutras                            |
+| `--section-line`    | Linhas divisórias e bordas azuladas               |
+| `--accent-soft`     | Fundo claro dos ícones                            |
+| `--backdrop`        | Fundo escurecido atrás dos modais                 |
+| `--danger-bg`, `--danger-text` | Mensagem de erro do formulário         |
+
+O modo escuro redefine essas variáveis em `:root[data-theme="dark"]`, no mesmo arquivo. O tema é aplicado antes da página aparecer por um pequeno script no `<head>` do `index.html` (escolha salva ou tema do sistema), e o botão do cabeçalho troca e salva a escolha. Para textos de destaque, links e ícones use `--accent` (azul `--color-qi` no claro, azul claro no escuro); para fundos de botão continue usando `--color-qi`.
+
+Não escreva cores fixas (`#fff`, `#56564e`...) no CSS dos componentes: use essas variáveis. É isso que permite criar um modo escuro redefinindo só esse bloco. As exceções são as ilustrações que imitam sites de clientes (os wireframes dos layouts e a tela de exemplo em "O que é uma Landing Page?"), que mantêm cores fixas e claras em qualquer tema. O rodapé usa um azul-marinho próprio, derivado de `--color-qi`, definido em `Footer.css`.
 
 ## Roadmap
 
@@ -136,6 +157,7 @@ Também em `global.css`, `--section-line` define a cor das linhas divisórias. O
 - [x] Contato por formulário (modal + Netlify Forms)
 - [x] Rodapé
 - [x] Layout responsivo para celular e tablet
+- [x] Modo escuro (segue o sistema; a escolha no botão fica salva)
 - [x] Deploy
 - [ ] Seção Depoimentos (quando houver depoimentos reais, com autorização dos clientes, e voltar o link ao menu)
 - [x] E-mail de contato no rodapé

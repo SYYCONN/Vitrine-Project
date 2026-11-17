@@ -15,8 +15,8 @@
   padding: 11px 14px;
   border: 1px solid var(--select-line);
   border-radius: 10px;
-  background: #fff;
-  color: var(--color-sx);
+  background: var(--surface);
+  color: var(--text);
   font: 400 15px/1.4 "Lato", sans-serif;
   text-align: start;
   cursor: pointer;
@@ -36,7 +36,7 @@
 
 .select-chevron {
   flex: none;
-  color: var(--color-qi);
+  color: var(--accent);
   transition: transform .2s;
 }
 
@@ -57,7 +57,7 @@
   overflow-y: auto;
   border: 1px solid var(--select-line);
   border-radius: 12px;
-  background: #fff;
+  background: var(--surface);
   box-shadow: 0 14px 34px color-mix(in srgb, var(--color-qi) 18%, transparent);
   list-style: none;
 }
@@ -73,18 +73,18 @@
   gap: 12px;
   padding: 10px 12px;
   border-radius: 8px;
-  color: var(--color-sx);
+  color: var(--text);
   font: 400 15px/1.35 "Lato", sans-serif;
   cursor: pointer;
 }
 
 .select-list li[data-active] {
   background: color-mix(in srgb, var(--color-qi) 7%, transparent);
-  color: var(--color-qi);
+  color: var(--accent);
 }
 
 .select-list li[aria-selected="true"] {
-  color: var(--color-qi);
+  color: var(--accent);
   font-weight: 700;
 }
 

@@ -1,9 +1,9 @@
 /* ===== Perguntas frequentes ===== */
 
 .faq-section {
-  --faq-line: color-mix(in srgb, var(--color-qi) 22%, #fff);
+  --faq-line: var(--section-line);
   padding-block: 64px;
-  color: var(--color-sx);
+  color: var(--text);
   font: 400 16px/1.6 "Lato", sans-serif;
   scroll-margin-block-start: 16px;
 }
@@ -18,10 +18,10 @@
 
 .faq-intro :is(.section-title, h2, p) {
   text-shadow:
-    1px 0 var(--color-p),
-    -1px 0 var(--color-p),
-    0 1px var(--color-p),
-    0 -1px var(--color-p);
+    1px 0 var(--bg),
+    -1px 0 var(--bg),
+    0 1px var(--bg),
+    0 -1px var(--bg);
 }
 
 .faq-intro h2 {
@@ -41,7 +41,7 @@
 
 .faq-intro p {
   margin: 0;
-  color: #56564e;
+  color: var(--text-muted);
 }
 
 .faq-list {
@@ -67,7 +67,7 @@
 .faq-item {
   border: 1px solid var(--faq-line);
   border-radius: 12px;
-  background: #fff;
+  background: var(--surface);
   transition: border-color .2s, box-shadow .2s;
 }
 
@@ -87,7 +87,7 @@
   gap: 16px;
   padding: 18px 22px;
   border-radius: 12px;
-  color: var(--color-sx);
+  color: var(--text);
   font: 700 17px/1.35 "Lato", sans-serif;
   list-style: none;
   cursor: pointer;
@@ -95,10 +95,10 @@
 
 .faq-item summary::-webkit-details-marker { display: none; }
 
-.faq-item[open] summary { color: var(--color-qi); }
+.faq-item[open] summary { color: var(--accent); }
 
 .faq-item summary:focus-visible {
-  outline: 2px solid var(--color-qi);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -109,26 +109,26 @@
   inline-size: 32px;
   block-size: 32px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--color-s) 16%, #fff);
-  color: var(--color-qi);
+  background: color-mix(in srgb, var(--color-s) 16%, var(--surface));
+  color: var(--accent);
   transition: transform .25s ease, background-color .2s, color .2s;
 }
 
 .faq-item[open] .faq-icon {
   background: var(--color-qi);
-  color: #fff;
+  color: var(--text-on-accent);
   transform: rotate(45deg);
 }
 
 .faq-answer {
   padding: 0 22px 20px;
-  color: #45453d;
+  color: var(--text-body);
 }
 
 .faq-answer p { margin: 0; }
 
 .faq-answer a {
-  color: var(--color-qi);
+  color: var(--accent);
   font-weight: 700;
   text-underline-offset: 3px;
 }
