@@ -22,7 +22,7 @@ function Hero() {
               </p>
             </div>
             <div className="hero-btn">
-              <button>Entrar em contato</button>
+              <button type="button" data-contact="landing-page">Entrar em contato</button>
               <button>Ver Projetos</button>
             </div>
             <div className="hero-benefits">

@@ -15,7 +15,7 @@ function ServiceCard({ icon: Icon, title, badge, description, action }) {
       <p>{description}</p>
       {action &&
         (action.href ? (
-          <a className="service-card-action" href={action.href}>
+          <a className="service-card-action" href={action.href} data-contact={action.contact}>
             {action.label}
           </a>
         ) : (

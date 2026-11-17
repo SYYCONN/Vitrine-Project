@@ -7,6 +7,7 @@ import Process from "./sections/Process.jsx";
 import Projects from "./sections/Projects.jsx";
 import FAQ from "./sections/FAQ.jsx";
 import Footer from "./sections/Footer.jsx";
+import ContactModal from "./components/ContactModal.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <FAQ />
       </main>
       <Footer />
+      <ContactModal />
     </>
   );
 }

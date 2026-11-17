@@ -15,7 +15,7 @@ function Header(){
                     <a href="#depoimentos">DEPOIMENTOS</a>
                 </nav>
                 <div className="header-btn">
-                    <button>Solicitar Contato</button>
+                    <button type="button" data-contact="landing-page">Solicitar Contato</button>
                 </div>
             </div>
         </header>

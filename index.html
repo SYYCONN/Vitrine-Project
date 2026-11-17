@@ -8,6 +8,22 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!--
+      Cópia estática do formulário de contato, só para o Netlify Forms
+      reconhecer os campos no deploy. O formulário visível fica em
+      src/components/ContactModal.jsx: os nomes dos campos precisam ser iguais.
+    -->
+    <form name="contato" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="assunto" />
+      <input name="nome" />
+      <input name="cidade" />
+      <input name="negocio" />
+      <input name="contato" />
+      <textarea name="mensagem"></textarea>
+      <input name="consentimento" />
+    </form>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
