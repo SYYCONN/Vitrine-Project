@@ -1,1 +1,114 @@
 /* ===== Rodapé ===== */
+
+.site-footer {
+  --footer-bg: color-mix(in srgb, var(--color-qi) 30%, #0a1020);
+  --footer-text: color-mix(in srgb, var(--color-p) 72%, var(--footer-bg));
+  --footer-line: color-mix(in srgb, var(--color-p) 14%, var(--footer-bg));
+  padding-block: 36px 20px;
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  font: 400 14px/1.6 "Lato", sans-serif;
+}
+
+.site-footer > .container {
+  box-sizing: border-box;
+}
+
+.footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 48px;
+}
+
+/* Marca */
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-logo {
+  flex: none;
+  border-radius: 6px;
+}
+
+.footer-logo img {
+  display: block;
+  inline-size: 120px;
+  block-size: auto;
+  filter: brightness(0) invert(1);
+}
+
+.footer-brand p {
+  max-inline-size: 36ch;
+  margin: 0;
+  padding-inline-start: 20px;
+  border-inline-start: 1px solid var(--footer-line);
+}
+
+/* Links */
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-links a {
+  color: var(--color-p);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.footer-links a:hover { color: var(--color-s); }
+
+/* Faixa final */
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-block-start: 28px;
+  padding-block-start: 18px;
+  border-block-start: 1px solid var(--footer-line);
+  font-size: 13px;
+}
+
+.footer-bottom p { margin: 0; }
+
+.footer-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-s);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer-top:hover { color: var(--color-p); }
+
+.footer-top svg { transition: transform .2s; }
+
+.footer-top:hover svg { transform: translateY(-2px); }
+
+.site-footer a:focus-visible {
+  outline: 2px solid var(--color-s);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+@media (max-width: 720px) {
+  .footer-brand { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-brand p { padding-inline-start: 0; border-inline-start: 0; }
+  .footer-links { gap: 8px 20px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}

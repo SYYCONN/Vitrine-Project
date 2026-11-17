@@ -8,6 +8,25 @@
   --color-q: #5571ff;
   --color-qi: #0c57b1;
   --color-sx: #23231c;
+
+  --section-line: color-mix(in srgb, var(--color-qi) 22%, #fff);
+}
+
+/* ===== Divisória entre seções (padrão do site) ===== */
+
+main > section + section {
+  position: relative;
+}
+
+main > section + section::before {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 50%;
+  inline-size: min(1200px - 48px, 100% - 48px);
+  block-size: 1px;
+  background: var(--section-line);
+  translate: -50% 0;
+  content: "";
 }
 
 .container {
@@ -129,7 +148,6 @@ header {
 
     display: flex;
     align-items: center; 
-    border-bottom: 1px solid rgb(117, 116, 116);
 }
 
 .hero-container{

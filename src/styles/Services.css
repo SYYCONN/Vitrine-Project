@@ -236,7 +236,6 @@
   align-content: center;
   min-block-size: 64svh;
   padding-block: 48px;
-  border-block-start: 1px solid color-mix(in srgb, var(--color-t) 22%, transparent);
   color: var(--color-sx);
 }
 
