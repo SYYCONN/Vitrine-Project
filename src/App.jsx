@@ -8,8 +8,11 @@ import Projects from "./sections/Projects.jsx";
 import FAQ from "./sections/FAQ.jsx";
 import Footer from "./sections/Footer.jsx";
 import ContactModal from "./components/ContactModal.jsx";
+import useCleanHashLinks from "./hooks/useCleanHashLinks.js";
 
 function App() {
+  useCleanHashLinks();
+
   return (
     <>
       <Header />
