@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CircleCheck, X } from "lucide-react";
+import Select from "./Select.jsx";
 import "../styles/Contact.css";
 
 /*
@@ -17,6 +18,8 @@ const subjects = {
   profissionais: "Rede de profissionais",
   duvida: "Outra dúvida",
 };
+
+const subjectOptions = Object.entries(subjects).map(([value, label]) => ({ value, label }));
 
 const emptyForm = {
   nome: "",
@@ -152,14 +155,14 @@ function ContactModal() {
                 <label>Não preencha este campo: <input name="bot-field" tabIndex={-1} autoComplete="off" /></label>
               </p>
 
-              <label className="contact-field contact-field-full">
-                <span>Assunto</span>
-                <select name="assunto" value={form.assunto} onChange={update}>
-                  {Object.entries(subjects).map(([value, label]) => (
-                    <option key={value} value={value}>{label}</option>
-                  ))}
-                </select>
-              </label>
+              <Select
+                className="contact-field contact-field-full"
+                label="Assunto"
+                name="assunto"
+                value={form.assunto}
+                options={subjectOptions}
+                onChange={update}
+              />
 
               <label className="contact-field">
                 <span>Seu nome</span>

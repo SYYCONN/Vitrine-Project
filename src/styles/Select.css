@@ -1,0 +1,103 @@
+/* ===== Select próprio (components/Select.jsx) ===== */
+
+.select {
+  --select-line: var(--section-line);
+  position: relative;
+}
+
+.select-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--select-line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--color-sx);
+  font: 400 15px/1.4 "Lato", sans-serif;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.select-button:hover {
+  border-color: var(--color-t);
+}
+
+.select .select-button:focus-visible,
+.select[data-open] .select-button {
+  border-color: var(--color-t);
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-t) 22%, transparent);
+}
+
+.select-chevron {
+  flex: none;
+  color: var(--color-qi);
+  transition: transform .2s;
+}
+
+.select[data-open] .select-chevron {
+  transform: rotate(180deg);
+}
+
+/* Lista de opções */
+
+.select-list {
+  position: absolute;
+  inset-block-start: calc(100% + 6px);
+  inset-inline: 0;
+  z-index: 10;
+  max-block-size: 240px;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  border: 1px solid var(--select-line);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--color-qi) 18%, transparent);
+  list-style: none;
+}
+
+.select-list[hidden] {
+  display: none;
+}
+
+.select-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--color-sx);
+  font: 400 15px/1.35 "Lato", sans-serif;
+  cursor: pointer;
+}
+
+.select-list li[data-active] {
+  background: color-mix(in srgb, var(--color-qi) 7%, transparent);
+  color: var(--color-qi);
+}
+
+.select-list li[aria-selected="true"] {
+  color: var(--color-qi);
+  font-weight: 700;
+}
+
+.select-list li svg {
+  flex: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .select[data-open] .select-list {
+    animation: select-open 160ms ease-out;
+  }
+
+  @keyframes select-open {
+    from { opacity: 0; transform: translateY(-4px); }
+  }
+}

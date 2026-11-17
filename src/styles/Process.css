@@ -182,6 +182,11 @@
   color: var(--color-qi);
 }
 
+.process-step > div {
+  min-inline-size: 0;
+  overflow-wrap: break-word;
+}
+
 .process-step h4 {
   margin: 0 0 4px;
   color: var(--color-sx);
@@ -223,7 +228,7 @@
 }
 
 /* Duas colunas: a seta da 2ª fase não atravessa para a linha de baixo */
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
   .process-map { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 40px; }
   .process-phase:nth-child(2n)::before,
   .process-phase:nth-child(2n)::after { display: none; }

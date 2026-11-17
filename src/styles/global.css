@@ -30,6 +30,7 @@ main > section + section::before {
 }
 
 .container {
+  box-sizing: border-box;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -66,6 +67,21 @@ header {
 
 .header-logo {
   justify-self: start;
+  display: block;
+  border-radius: 6px;
+}
+
+.header-logo img {
+  display: block;
+}
+
+/* No desktop o painel não existe: nav e botão viram itens da grade */
+.header-menu {
+  display: contents;
+}
+
+.header-toggle {
+  display: none;
 }
 .header-logo img {
   max-width: 200px;
@@ -111,10 +127,10 @@ header {
 }
 
 .header-btn button {
-  width: 130px;
-  height: 30px;
+  height: 40px;
 
-  padding: 20px;
+  padding: 0 20px;
+  white-space: nowrap;
 
   color:white;
   font-size: 14px;
@@ -193,6 +209,10 @@ header {
 .hero-btn{
     display: flex;
     gap: 20px;
+}
+
+.hero-btn button{
+    font-family: "Lato", sans-serif;
 }
 
 .hero-btn button:first-child{
@@ -294,6 +314,7 @@ header {
 }
 
 .benefit-item span{
+    font-family: "Lato", sans-serif;
     font-size:14px;
     color: #666;
     white-space: nowrap;
@@ -314,4 +335,154 @@ header {
 
 .highlight-text {
     color: var(--color-t);
+}
+
+/* Notebooks menores: aproxima os links para caberem entre o logo e o botão */
+@media (max-width: 1300px) {
+  .header-actions { gap: 24px; }
+}
+
+/* ===== Telas menores: header com menu ☰ (o menu completo só cabe a partir de ~1100px) ===== */
+
+@media (max-width: 1100px) {
+  header {
+    position: relative;
+    z-index: 50;
+    height: 76px;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--section-line);
+  }
+
+  .header-logo img {
+    max-width: 132px;
+    max-height: 48px;
+  }
+
+  .header-logo img:hover { transform: none; }
+
+  .header-toggle {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--section-line);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--color-qi);
+    cursor: pointer;
+  }
+
+  .header-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 16px;
+    right: 16px;
+    display: grid;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid var(--section-line);
+    border-radius: 14px;
+    background: var(--color-p);
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--color-qi) 18%, transparent);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity .2s, transform .2s, visibility 0s .2s;
+  }
+
+  header[data-open] .header-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity .2s, transform .2s;
+  }
+
+  .header-actions,
+  .header-btn {
+    justify-self: stretch;
+  }
+
+  .header-actions {
+    display: grid;
+    gap: 2px;
+  }
+
+  .header-actions a {
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+
+  .header-actions a:hover,
+  .header-actions a:focus-visible {
+    background: color-mix(in srgb, var(--color-qi) 7%, transparent);
+    transform: none;
+  }
+
+  .header-btn button {
+    width: 100%;
+    height: 48px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .header-btn button:hover { transform: none; }
+}
+
+/* ===== Celular e tablet: Hero em uma coluna ===== */
+
+@media (max-width: 900px) {
+
+  .hero-content {
+    min-height: 0;
+    padding-block: 40px 56px;
+  }
+
+  .hero-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .hero-info { gap: 24px; }
+
+  .hero-title h1 { font-size: clamp(28px, 7.5vw, 42px); }
+
+  .hero-title h1 br { display: none; }
+
+  .hero-title p {
+    margin-top: 16px;
+    font-size: 13px;
+  }
+
+  .hero-btn { flex-wrap: wrap; gap: 12px; }
+
+  .hero-btn button:is(:first-child, :nth-child(2)) {
+    flex: 1 1 140px;
+    padding: 14px 16px;
+  }
+
+  .hero-benefits {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .benefit-item:hover { transform: none; }
+
+  .hero-image { justify-content: center; }
+
+  .hero-image img { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-menu { transition: none; }
 }
