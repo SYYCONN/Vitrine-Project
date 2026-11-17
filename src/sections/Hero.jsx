@@ -23,7 +23,7 @@ function Hero() {
             </div>
             <div className="hero-btn">
               <button type="button" data-contact="landing-page">Entrar em contato</button>
-              <button>Ver Projetos</button>
+              <button type="button" onClick={() => document.getElementById("portfolio")?.scrollIntoView()}>Ver Projetos</button>
             </div>
             <div className="hero-benefits">
               <div className="benefit-item">
