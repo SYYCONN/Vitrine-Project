@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import ProjectCard from "../components/ProjectCard.jsx";
 import nicacioBodyart from "../assets/nicacio-bodyart.jpeg";
 import observaInicio from "../assets/observa-poder-inicio.png";
@@ -16,6 +16,7 @@ const projects = [
     name: "Nicácio Bodyart",
     description: "Landing page · Tatuagens autorais",
     screenshots: [{
+      label: "Página inicial",
       src: nicacioBodyart,
       alt: "Página inicial do Nicácio Bodyart com fundo de estúdio e a frase Arte que você carrega.",
       width: 1600,
@@ -27,13 +28,13 @@ const projects = [
     name: "Observa Poder",
     description: "Portal de dados públicos · Representantes, projetos e votações",
     screenshots: [
-      [observaInicio, "Página inicial com busca e destaque de registros da Câmara"],
-      [observaRepresentantes, "Consulta de deputados federais com filtros e lista de representantes"],
-      [observaGovernadores, "Página de governadores com aviso de consulta em preparação"],
-      [observaPartidos, "Página de partidos e seus membros com aviso de consulta em preparação"],
-      [observaProjetos, "Consulta de projetos e proposições com filtros por casa legislativa, ano e tipo"],
-      [observaVotacoes, "Consulta de votações com filtros de ano, resultado e modalidade"],
-    ].map(([src, alt]) => ({ src, alt, width: 1233, height: 884 })),
+      ["Início", observaInicio, "Página inicial com busca e destaque de registros da Câmara"],
+      ["Representantes", observaRepresentantes, "Consulta de deputados federais com filtros e lista de representantes"],
+      ["Governadores", observaGovernadores, "Página de governadores com aviso de consulta em preparação"],
+      ["Partidos", observaPartidos, "Página de partidos e seus membros com aviso de consulta em preparação"],
+      ["Projetos", observaProjetos, "Consulta de projetos e proposições com filtros por casa legislativa, ano e tipo"],
+      ["Votações", observaVotacoes, "Consulta de votações com filtros de ano, resultado e modalidade"],
+    ].map(([label, src, alt]) => ({ label, src, alt, width: 1233, height: 884 })),
   },
 ];
 
@@ -398,13 +399,16 @@ function useGalleryPreview() {
 
   useEffect(() => {
     const dialog = dialogRef.current;
-    if (selected && !dialog.open) dialog.showModal();
+    if (selected && !dialog.open) {
+      dialog.showModal();
+      dialog.focus();
+    }
   }, [selected]);
 
   return { dialogRef, selected, open: setSelected, clear: () => setSelected(null) };
 }
 
-function GalleryPreview({ preview, id, title, description, children }) {
+function GalleryPreview({ preview, titleId, ratio, tabs = false, onKeyDown, children }) {
   const { dialogRef, clear } = preview;
   const startedOnBackdrop = useRef(false);
   const [closing, setClosing] = useState(false);
@@ -416,15 +420,19 @@ function GalleryPreview({ preview, id, title, description, children }) {
   return (
     <dialog
       ref={dialogRef}
-      className="projects-layout-dialog"
-      aria-labelledby={id}
+      className="projects-preview"
+      aria-labelledby={titleId}
+      tabIndex={-1}
       data-closing={closing || undefined}
+      data-tabs={tabs || undefined}
+      style={{ "--preview-ratio": ratio }}
+      onKeyDown={onKeyDown}
       onCancel={(event) => {
         event.preventDefault();
         closePreview();
       }}
       onAnimationEnd={(event) => {
-        if (event.target === event.currentTarget && event.animationName === "projects-layout-exit") {
+        if (event.target === event.currentTarget && event.animationName === "projects-preview-exit") {
           event.currentTarget.close();
         }
       }}
@@ -441,24 +449,100 @@ function GalleryPreview({ preview, id, title, description, children }) {
     >
       {preview.selected && (
         <>
-          <div className="projects-layout-dialog-heading">
-            <div>
-              <h4 id={id}>{title}</h4>
-              {description && <p>{description}</p>}
-            </div>
-            <button type="button" onClick={closePreview}>Fechar</button>
-          </div>
-          <div className="projects-layout-scroll" role="region" aria-label={title} tabIndex={0}>
-            {children}
-          </div>
+          <button type="button" className="projects-preview-close" aria-label="Fechar" onClick={closePreview}>
+            <X size={20} aria-hidden="true" />
+          </button>
+          {children}
         </>
       )}
     </dialog>
   );
 }
 
+function PreviewInfo({ id, eyebrow, title, subtitle, children }) {
+  return (
+    <div className="projects-preview-info">
+      <div className="projects-preview-text">
+        <span className="projects-preview-eyebrow">{eyebrow}</span>
+        <h4 id={id}>{title}</h4>
+        {subtitle && <p>{subtitle}</p>}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function PreviewStepper({ label, prevLabel, nextLabel, index, total, onStep }) {
+  return (
+    <div className="projects-preview-stepper" role="group" aria-label={label}>
+      <button type="button" aria-label={prevLabel} onClick={() => onStep(-1)}>
+        <ChevronLeft size={28} strokeWidth={1.75} aria-hidden="true" />
+      </button>
+      <span aria-live="polite">{index + 1} / {total}</span>
+      <button type="button" aria-label={nextLabel} onClick={() => onStep(1)}>
+        <ChevronRight size={28} strokeWidth={1.75} aria-hidden="true" />
+      </button>
+    </div>
+  );
+}
+
+function wrapIndex(index, total) {
+  return (index + total) % total;
+}
+
+function PortfolioPreview({ project, titleId }) {
+  const { name, description, screenshots } = project;
+  const [index, setIndex] = useState(0);
+  const total = screenshots.length;
+  const current = screenshots[index];
+  const multiple = total > 1;
+
+  return (
+    <>
+      <div className="projects-preview-media">
+        <img
+          key={current.src}
+          src={current.src}
+          alt={current.alt}
+          width={current.width}
+          height={current.height}
+          decoding="async"
+        />
+      </div>
+      <PreviewInfo id={titleId} eyebrow={multiple ? `Portfólio · ${current.label}` : "Portfólio"} title={name} subtitle={description}>
+        {multiple && (
+          <PreviewStepper
+            label="Telas do projeto"
+            prevLabel="Tela anterior"
+            nextLabel="Próxima tela"
+            index={index}
+            total={total}
+            onStep={(step) => setIndex(wrapIndex(index + step, total))}
+          />
+        )}
+      </PreviewInfo>
+      {multiple && (
+        <div className="projects-preview-tabs" role="group" aria-label="Escolher tela">
+          {screenshots.map((shot, shotIndex) => (
+            <button
+              key={shot.src}
+              type="button"
+              aria-current={shotIndex === index || undefined}
+              onClick={() => setIndex(shotIndex)}
+            >
+              {shot.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
 function LayoutGallery() {
   const preview = useGalleryPreview();
+  const index = layouts.indexOf(preview.selected);
+  const layout = preview.selected;
 
   return (
     <div className="projects-layouts" id="layouts" tabIndex={-1}>
@@ -469,16 +553,43 @@ function LayoutGallery() {
         </p>
       </div>
       <GalleryTrack id="projects-layout-track" titleId="projects-layouts-title">
-        {layouts.map((layout) => (
+        {layouts.map((item) => (
           <LayoutCard
-            key={layout.id}
-            layout={layout}
-            onOpen={() => preview.open(layout)}
+            key={item.id}
+            layout={item}
+            onOpen={() => preview.open(item)}
           />
         ))}
       </GalleryTrack>
-      <GalleryPreview preview={preview} id="projects-layout-dialog-title" title={preview.selected?.label}>
-        {preview.selected && <LayoutWireframe key={preview.selected.id} type={preview.selected.id} interactive />}
+      <GalleryPreview preview={preview} titleId="projects-layout-dialog-title" ratio={16 / 10}>
+        {layout && (
+          <>
+            <div
+              key={layout.id}
+              className="projects-preview-media projects-layout-scroll"
+              role="region"
+              aria-label={`Prévia interativa: ${layout.label}`}
+              tabIndex={0}
+            >
+              <LayoutWireframe type={layout.id} interactive />
+            </div>
+            <PreviewInfo
+              id="projects-layout-dialog-title"
+              eyebrow="Modelo de layout"
+              title={layout.label}
+              subtitle={`${layout.description}. Role e clique nos elementos para testar.`}
+            >
+              <PreviewStepper
+                label="Modelos de layout"
+                prevLabel="Modelo anterior"
+                nextLabel="Próximo modelo"
+                index={index}
+                total={layouts.length}
+                onStep={(step) => preview.open(layouts[wrapIndex(index + step, layouts.length)])}
+              />
+            </PreviewInfo>
+          </>
+        )}
       </GalleryPreview>
     </div>
   );
@@ -486,15 +597,18 @@ function LayoutGallery() {
 
 function PortfolioGallery() {
   const preview = useGalleryPreview();
+  const project = preview.selected;
+  const [cover] = project?.screenshots ?? [];
+  const multiple = project?.screenshots.length > 1;
 
   return (
     <div className="projects-portfolio">
       <GalleryTrack id="projects-portfolio-track" titleId="projects-title" portfolio>
-        {projects.map((project) => (
+        {projects.map((item) => (
           <ProjectCard
-            key={project.id}
-            project={project}
-            onOpen={() => preview.open(project)}
+            key={item.id}
+            project={item}
+            onOpen={() => preview.open(item)}
           />
         ))}
         <div className="projects-layout-card projects-coming-soon">
@@ -506,13 +620,18 @@ function PortfolioGallery() {
       </GalleryTrack>
       <GalleryPreview
         preview={preview}
-        id="projects-portfolio-dialog-title"
-        title={preview.selected?.name}
-        description={preview.selected?.description}
+        titleId="projects-portfolio-dialog-title"
+        ratio={cover ? cover.width / cover.height : 1}
+        tabs={multiple}
+        onKeyDown={(event) => {
+          if (!multiple || !["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+          event.preventDefault();
+          event.currentTarget.querySelector(event.key === "ArrowLeft"
+            ? ".projects-preview-stepper button:first-child"
+            : ".projects-preview-stepper button:last-child")?.click();
+        }}
       >
-        {preview.selected?.screenshots.map(({ src, alt, width, height }, index) => (
-          <img className="projects-portfolio-capture" key={src} src={src} alt={alt} width={width} height={height} decoding="async" loading={index > 0 ? "lazy" : "eager"} />
-        ))}
+        {project && <PortfolioPreview key={project.id} project={project} titleId="projects-portfolio-dialog-title" />}
       </GalleryPreview>
     </div>
   );

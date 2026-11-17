@@ -41,8 +41,7 @@
 
 .project-card-cover { position: relative; background: #111; }
 
-.project-card-cover img,
-.projects-portfolio-capture {
+.project-card-cover img {
   display: block;
   inline-size: 100%;
   block-size: auto;
@@ -54,10 +53,6 @@
   block-size: 100%;
   object-fit: cover;
   object-position: center top;
-}
-
-.projects-portfolio-capture + .projects-portfolio-capture {
-  border-block-start: 4px solid var(--wire-light);
 }
 
 .projects-coming-soon {
@@ -222,8 +217,7 @@
 
 .projects-layout-caption > div { flex: 1 1 115px; min-inline-size: 0; }
 
-.projects-layout-caption :is(h3, h4),
-.projects-layout-dialog-heading h4 {
+.projects-layout-caption :is(h3, h4) {
   margin: 0;
   color: var(--color-qi);
   font: 900 15px/1.25 "Lato", sans-serif;
@@ -236,8 +230,7 @@
   line-height: 1.3;
 }
 
-.projects-layout-caption button,
-.projects-layout-dialog-heading button {
+.projects-layout-caption button {
   min-block-size: 40px;
   padding: 6px 12px;
   border: 1px solid var(--color-qi);
@@ -248,8 +241,7 @@
   cursor: pointer;
 }
 
-.projects-layout-caption button:hover,
-.projects-layout-dialog-heading button:hover {
+.projects-layout-caption button:hover {
   background: var(--color-qi);
   color: #fff;
 }
@@ -267,68 +259,247 @@
   background: #eaeaea;
 }
 
-.projects-layout-dialog {
+/* ===== Modal de prévia (Portfólio e Layouts) ===== */
+
+.projects-preview {
   --projects-exit-duration: 1ms;
+  --preview-chrome: 132px;
+  --preview-gap: 32px;
+  position: fixed;
   box-sizing: border-box;
-  inline-size: min(60rem, calc(100% - 28px));
-  max-block-size: calc(100% - 24px);
-  padding: 14px;
-  border: 1px solid var(--wire-border);
-  border-radius: 12px;
-  background: #fff;
-  color: var(--wire-ink);
+  inline-size: min(
+    68rem,
+    calc(100vw - var(--preview-gap)),
+    max(30rem, calc((100svh - var(--preview-gap) - var(--preview-chrome)) * var(--preview-ratio)))
+  );
+  max-inline-size: calc(100vw - var(--preview-gap));
+  max-block-size: calc(100svh - var(--preview-gap));
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 0;
+  border-radius: 18px;
+  background: var(--color-p);
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--color-qi) 28%, transparent);
+  color: var(--color-sx);
+  font: 400 16px/1.5 "Lato", sans-serif;
 }
 
-.projects-layout-dialog::backdrop {
+.projects-preview[data-tabs] { --preview-chrome: 184px; }
+
+.projects-preview:focus { outline: none; }
+
+.projects-preview::backdrop {
   background: color-mix(in srgb, var(--color-sx) 62%, transparent);
+  backdrop-filter: blur(3px);
 }
+
+/* Mídia: ocupa toda a largura, sem faixas laterais */
+
+.projects-preview-media {
+  position: relative;
+  aspect-ratio: var(--preview-ratio);
+  overflow: hidden;
+  border-radius: 18px 18px 0 0;
+  border-block-end: 1px solid var(--projects-line);
+  background: var(--color-sx);
+}
+
+.projects-preview-media > img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.projects-preview-media.projects-layout-scroll {
+  overflow: auto;
+  background: #fafafa;
+  scrollbar-color: var(--color-t) color-mix(in srgb, var(--color-s) 12%, #fff);
+}
+
+/* Fechar */
+
+.projects-preview-close {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-end: 12px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-p) 94%, transparent);
+  box-shadow: 0 4px 14px rgb(0 0 0 / .18);
+  color: var(--color-qi);
+  cursor: pointer;
+  transition: background-color .2s, color .2s, transform .2s;
+}
+
+.projects-preview-close:hover {
+  background: var(--color-qi);
+  color: #fff;
+  transform: scale(1.06);
+}
+
+/* Título, subtítulo e navegação */
+
+.projects-preview-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  padding: 18px 24px;
+}
+
+.projects-preview-text {
+  flex: 1 1 20rem;
+  min-inline-size: 0;
+}
+
+.projects-preview-eyebrow {
+  display: block;
+  color: var(--color-qi);
+  font: 700 12px/1.3 "Lato", sans-serif;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.projects-preview-text h4 {
+  margin: 6px 0 0;
+  color: var(--color-sx);
+  font: 400 24px/1.2 "Bruno Ace", sans-serif;
+}
+
+.projects-preview-text p {
+  margin: 6px 0 0;
+  color: #56564e;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.projects-preview-stepper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.projects-preview-stepper span {
+  min-inline-size: 3.5ch;
+  color: var(--color-sx);
+  font: 700 14px/1 "Lato", sans-serif;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.projects-preview-stepper button {
+  display: grid;
+  place-items: center;
+  inline-size: 42px;
+  block-size: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-sx);
+  cursor: pointer;
+  transition: color .2s, transform .2s;
+}
+
+.projects-preview-stepper button:hover {
+  color: var(--color-qi);
+  transform: scale(1.12);
+}
+
+.projects-preview-stepper button:active { transform: scale(.95); }
+
+/* Abas das telas */
+
+.projects-preview-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 0 24px 20px;
+  scrollbar-width: none;
+}
+
+.projects-preview-tabs button {
+  flex: none;
+  padding: 8px 16px;
+  border: 1px solid var(--projects-line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--color-sx);
+  font: 700 13px/1.2 "Lato", sans-serif;
+  cursor: pointer;
+  transition: border-color .2s, color .2s, background-color .2s;
+}
+
+.projects-preview-tabs button:hover {
+  border-color: var(--color-t);
+  color: var(--color-qi);
+}
+
+.projects-preview-tabs button[aria-current] {
+  border-color: var(--color-qi);
+  background: var(--color-qi);
+  color: #fff;
+}
+
+/* Animações */
 
 @media (prefers-reduced-motion: no-preference) {
-  .projects-layout-dialog { --projects-exit-duration: 180ms; }
+  .projects-preview { --projects-exit-duration: 180ms; }
 
-  .projects-layout-dialog[open] {
-    animation: projects-layout-enter 240ms cubic-bezier(.2, .75, .3, 1) both;
+  .projects-preview[open] {
+    animation: projects-preview-enter 260ms cubic-bezier(.2, .75, .3, 1) both;
   }
 
-  .projects-layout-dialog[open]::backdrop {
-    animation: projects-layout-backdrop-enter 200ms ease-out both;
+  .projects-preview[open]::backdrop {
+    animation: projects-preview-backdrop-enter 200ms ease-out both;
   }
 
-  @keyframes projects-layout-enter {
-    from { opacity: 0; transform: translateY(8px) scale(.98); }
+  .projects-preview-media > img { animation: projects-preview-fade 240ms ease-out; }
+
+  @keyframes projects-preview-enter {
+    from { opacity: 0; transform: translateY(10px) scale(.98); }
   }
 
-  @keyframes projects-layout-backdrop-enter { from { opacity: 0; } }
+  @keyframes projects-preview-backdrop-enter { from { opacity: 0; } }
+
+  @keyframes projects-preview-fade { from { opacity: 0; } }
 }
 
-.projects-layout-dialog[open][data-closing] {
-  animation: projects-layout-exit var(--projects-exit-duration) ease-in both;
+.projects-preview[open][data-closing] {
+  animation: projects-preview-exit var(--projects-exit-duration) ease-in both;
 }
 
-.projects-layout-dialog[open][data-closing]::backdrop {
-  animation: projects-layout-backdrop-exit var(--projects-exit-duration) ease-in both;
+.projects-preview[open][data-closing]::backdrop {
+  animation: projects-preview-backdrop-exit var(--projects-exit-duration) ease-in both;
 }
 
-@keyframes projects-layout-exit {
-  to { opacity: 0; transform: translateY(8px) scale(.98); }
+@keyframes projects-preview-exit {
+  to { opacity: 0; transform: translateY(10px) scale(.98); }
 }
 
-@keyframes projects-layout-backdrop-exit {
+@keyframes projects-preview-backdrop-exit {
   to { opacity: 0; }
 }
 
-.projects-layout-dialog-heading p {
-  margin: 3px 0 0;
-  color: var(--color-sx);
-  font-size: 13px;
-}
-
-.projects-layout-dialog-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-block-end: 10px;
+@media (max-width: 530px) {
+  .projects-preview { --preview-gap: 20px; border-radius: 14px; }
+  .projects-preview-media { border-radius: 14px 14px 0 0; }
+  .projects-preview-info { padding: 14px 16px; }
+  .projects-preview-text h4 { font-size: 20px; }
+  .projects-preview-text p { font-size: 14px; }
+  .projects-preview-stepper { inline-size: 100%; justify-content: space-between; }
+  .projects-preview-close { inset-block-start: 8px; inset-inline-end: 8px; inline-size: 36px; block-size: 36px; }
+  .projects-preview-tabs { padding: 0 16px 16px; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -349,11 +520,8 @@
 
 .projects-layout-scroll {
   container: layout-preview / inline-size;
-  max-block-size: min(75svh, 46rem);
   overflow: auto;
   overscroll-behavior: contain;
-  scrollbar-color: #888 #f4f4f4;
-  border: 1px solid var(--wire-border);
 }
 
 .projects-wire {
